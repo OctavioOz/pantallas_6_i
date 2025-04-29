@@ -1,7 +1,52 @@
-// ignore_for_file: unused_import
-
 import 'package:flutter/material.dart';
-import 'package:ozaetarutas/pagina3.dart';
+
+//! AnimatedDefaultTextStyle
+
+class Widget010 extends StatefulWidget {
+  const Widget010({Key? key}) : super(key: key);
+
+  @override
+  State<Widget010> createState() => _Widget010State();
+}
+
+class _Widget010State extends State<Widget010> {
+  bool _first = true;
+  double _fontSize = 60;
+  Color _color = Colors.blue;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        SizedBox(
+          height: 120,
+          child: AnimatedDefaultTextStyle(
+            duration: const Duration(milliseconds: 300),
+            style: TextStyle(
+              fontSize: _fontSize,
+              color: _color,
+              fontWeight: FontWeight.bold,
+            ),
+            child: const Text('Flutter'),
+          ),
+        ),
+        TextButton(
+          onPressed: () {
+            setState(() {
+              _fontSize = _first ? 90 : 60;
+              _color = _first ? Colors.blue : Colors.red;
+              _first = !_first;
+            });
+          },
+          child: const Text(
+            "Switch",
+          ),
+        )
+      ],
+    );
+  }
+}
 
 class PantallaTres extends StatelessWidget {
   const PantallaTres({Key? key}) : super(key: key);
@@ -10,7 +55,7 @@ class PantallaTres extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xff9eea6a),
+        backgroundColor: const Color(0xff9eea6a),
         title: const Text(
           'Pantalla de Tres',
           style: TextStyle(
@@ -20,14 +65,7 @@ class PantallaTres extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: const Text('Pantalla Inicial'),
-        ),
-      ), // Usamos MiAppBar
+      body: const Widget010(), // Aquí se inserta el Widget010 en el body
     );
   }
 }
